@@ -1,0 +1,22 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Dialog Polyfill Test</title>
+  <script src="../dialog.js" type="module"></script>
+
+
+<body>
+    <h1>Dialog Polyfill Test</h1>
+
+    <button onclick="dialog1.showModal()">showModal()</button>
+    <button onclick="dialog1.show()">show()</button>
+    <dialog id=dialog1>
+        <button onclick="this.parentNode.close()">close()</button>
+        <br>
+        <a href="#">a link</a>
+        <ul>
+            <li>
+                press escape to close
+            </li>
+        </ul>
+    </dialog>
