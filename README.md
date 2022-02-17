@@ -23,5 +23,5 @@ dialog + .backdrop {
 ## Help / Feedback
 
 Please provide feedback by opening an issue or pull request, would make me very happy.  
-Also Feautures requests are welcome.
+Features requests are also welcome.
 
