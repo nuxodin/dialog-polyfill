@@ -5,7 +5,7 @@ Mimimal, but very lightweight polyfill for the [dialog element](https://develope
 ## Ussage
 
 ```html
-<script src="https://cdn.jsdelivr.net/gh/nuxodin/dialog-polyfill@x.x.x/dialog.js" type="module"></script>
+<script src="https://cdn.jsdelivr.net/gh/nuxodin/dialog-polyfill@x.x.x/dialog.min.js" type="module"></script>
 ```
 
 Style backdrop like this:
