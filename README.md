@@ -20,3 +20,7 @@ dialog + .backdrop {
 
 Please provide feedback by opening an issue or pull request, would make me very happy.  
 Also Feautures requests are welcome.
+
+## Limitations
+- Just modern browsers (no IE)
+- Form method=dialog / returnValue is not yet implemented
