@@ -7,8 +7,12 @@ Mimimal, but very lightweight polyfill for the [dialog element](https://develope
 ```html
 <script src="https://cdn.jsdelivr.net/gh/nuxodin/dialog-polyfill@x.x.x/dialog.min.js" type="module"></script>
 ```
+Thats it!
 
-Style backdrop like this:
+## Limitations
+- Just modern browsers (no IE)
+- Form method=dialog / returnValue is not yet implemented
+- You have to style backdrops like this:
 ```css
 dialog::backdrop ,
 dialog + .backdrop {
@@ -21,6 +25,3 @@ dialog + .backdrop {
 Please provide feedback by opening an issue or pull request, would make me very happy.  
 Also Feautures requests are welcome.
 
-## Limitations
-- Just modern browsers (no IE)
-- Form method=dialog / returnValue is not yet implemented
