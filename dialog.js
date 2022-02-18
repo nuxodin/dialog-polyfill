@@ -82,43 +82,42 @@ if (!window.HTMLDialogElement) {
         activeDialog.close();
     },true)
 
-const css = `
-dialog:not([open]) {
- display: none;
-}
-dialog {
- display: block;
- position: absolute;
- left: 0;
- right: 0;
- width: fit-content;
- height: fit-content;
- margin: auto;
- border-width: initial;
- border-style: solid;
- border-color: initial;
- border-image: initial;
- padding: 1em;
- background: white;
- color: black;
-}
-.dialog-polyfill-as-modal {
- position: fixed;
- top: 0;
- bottom: 0;
- max-width: calc((100% - 6px) - 2em);
- max-height: calc((100% - 6px) - 2em);
- overflow: auto;
-}
-dialog + .backdrop {
- position: fixed;
- top: 0;
- right: 0;
- bottom: 0;
- left: 0;
- background:#0002;
-}
-`;
-document.head.insertAdjacentHTML('afterbegin','<style>'+css+'</style>');
+    const css =
+    'dialog:not([open]){'+
+        'display:none;'+
+    '}'+
+    'dialog{'+
+        'display:block;'+
+        'position:absolute;'+
+        'left:0;'+
+        'right:0;'+
+        'width:fit-content;'+
+        'height:fit-content;'+
+        'margin:auto;'+
+        'border-width:initial;'+
+        'border-style:solid;'+
+        'border-color:initial;'+
+        'border-image:initial;'+
+        'padding:1em;'+
+        'background:white;'+
+        'color:black;'+
+    '}'+
+    '.dialog-polyfill-as-modal{'+
+        'position:fixed;'+
+        'top:0;'+
+        'bottom:0;'+
+        'max-width:calc((100% - 6px) - 2em);'+
+        'max-height:calc((100% - 6px) - 2em);'+
+        'overflow:auto;'+
+    '}'+
+    'dialog + .backdrop{'+
+        'position:fixed;'+
+        'top:0;'+
+        'right:0;'+
+        'bottom:0;'+
+        'left:0;'+
+        'background:#0002;'+
+    '}';
+    document.head.insertAdjacentHTML('afterbegin','<style>'+css+'</style>');
 
 }
