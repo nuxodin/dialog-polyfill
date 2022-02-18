@@ -1,6 +1,6 @@
 # dialog-element-polyfill
 
-Mimimal, but very lightweight polyfill for the [dialog element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog).
+Lightweight polyfill (2kb) for the [dialog element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog).
 
 ## Ussage
 
