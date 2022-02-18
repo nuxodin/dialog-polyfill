@@ -45,6 +45,7 @@ if (!window.HTMLDialogElement) {
         removeEventListener('keydown',escListener,true);
         activeDialog = null;
         this.__lastActiveElement.focus();
+        // todo: trigger close
     }
     Object.defineProperty(proto, 'open', {
         get(){
