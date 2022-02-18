@@ -83,9 +83,6 @@ if (!window.HTMLDialogElement) {
     },true)
 
     const css =
-    'dialog:not([open]){'+
-        'display:none;'+
-    '}'+
     'dialog{'+
         'display:block;'+
         'position:absolute;'+
@@ -101,6 +98,9 @@ if (!window.HTMLDialogElement) {
         'padding:1em;'+
         'background:white;'+
         'color:black;'+
+    '}'+
+    'dialog:not([open]){'+
+        'display:none;'+
     '}'+
     '.dialog-polyfill-as-modal{'+
         'position:fixed;'+
