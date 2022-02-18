@@ -11,7 +11,6 @@ Thats it!
 
 ## Limitations
 - Just modern browsers (no IE)
-- Form method=dialog / returnValue is not yet implemented
 - You have to style backdrops like this:
 ```css
 dialog::backdrop ,
@@ -24,4 +23,3 @@ dialog + .backdrop {
 
 Please provide feedback by opening an issue or pull request, would make me very happy.  
 Features requests are also welcome.
-

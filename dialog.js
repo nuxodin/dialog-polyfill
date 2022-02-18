@@ -15,11 +15,10 @@ if (!window.HTMLDialogElement) {
         this.classList.add('dialog-polyfill-as-modal');
 
         // focus first element
-        const focusableEl = this.querySelector('a[href], button, input, textarea, select, details, [contenteditable], [tabindex]');
+        const focusableEl = this.querySelector('a[href],button,input,textarea,select,details,[contenteditable],[tabindex]');
         focusableEl.focus();
 
-        // prevent focusout
-        this.addEventListener('blur',preventBlurListener,true)
+        this.addEventListener('blur',preventBlurListener,true);
         addEventListener('keydown',escListener,true);
 
         // backdrop
@@ -40,12 +39,13 @@ if (!window.HTMLDialogElement) {
     proto.close = function(){
         this.classList.remove('dialog-polyfill-as-modal');
         this.removeAttribute('open');
-        this.__backdrop.remove();
+        this.__backdrop?.remove();
         this.removeEventListener('blur',preventBlurListener,true)
         removeEventListener('keydown',escListener,true);
         activeDialog = null;
-        this.__lastActiveElement.focus();
-        // todo: trigger close
+        this.__lastActiveElement?.focus();
+        let event = new Event('close',{bubbles:true})
+        this.dispatchEvent(event);
     }
     Object.defineProperty(proto, 'open', {
         get(){
@@ -55,11 +55,6 @@ if (!window.HTMLDialogElement) {
             value ? this.open() : this.close();
         }
     })
-    Object.defineProperty(proto, 'returnValue', {
-        get(){ throw('returnValue not supported') },
-        set(value){ throw('returnValue not supported') }
-    })
-
 
     function preventBlurListener(e){
         if (!e.relatedTarget) return;
@@ -70,48 +65,60 @@ if (!window.HTMLDialogElement) {
         }
     }
     function escListener(e){
-        if(e.key === "Escape") {
-            activeDialog.close();
+        if (e.key === "Escape") {
+            let event = new Event('cancel',{bubbles:true,cancelable:true})
+            activeDialog.dispatchEvent(event);
+            if (!event.defaultPrevented) {
+                activeDialog.close();
+            }
         }
     }
 
-    const css = `
-    dialog:not([open]) {
-        display: none;
-    }
-    dialog {
-        display: block;
-        position: absolute;
-        left: 0px;
-        right: 0px;
-        width: fit-content;
-        height: fit-content;
-        margin: auto;
-        border-width: initial;
-        border-style: solid;
-        border-color: initial;
-        border-image: initial;
-        padding: 1em;
-        /*color: -internal-light-dark(black, white); background: -internal-light-dark(white, black);*/
-        background: white;
-        color: black;
-    }
-    .dialog-polyfill-as-modal {
-        position: fixed;
-        top: 0px;
-        bottom: 0px;
-        max-width: calc((100% - 6px) - 2em);
-        max-height: calc((100% - 6px) - 2em);
-        overflow: auto;
-    }
-    dialog + .backdrop {
-        position: fixed;
-        top: 0px;
-        right: 0px;
-        bottom: 0px;
-        left: 0px;
-        background: rgba(0, 0, 0, .1);
-    }
-    `;
-    document.head.insertAdjacentHTML('afterbegin','<style>'+css+'</style>');
+
+    addEventListener('submit',e=>{
+        if (e.target.getAttribute('method') !== 'dialog') return;
+        e.preventDefault();
+        activeDialog.returnValue = e.submitter.value;
+        activeDialog.close();
+    },true)
+
+const css = `
+dialog:not([open]) {
+ display: none;
+}
+dialog {
+ display: block;
+ position: absolute;
+ left: 0;
+ right: 0;
+ width: fit-content;
+ height: fit-content;
+ margin: auto;
+ border-width: initial;
+ border-style: solid;
+ border-color: initial;
+ border-image: initial;
+ padding: 1em;
+ background: white;
+ color: black;
+}
+.dialog-polyfill-as-modal {
+ position: fixed;
+ top: 0;
+ bottom: 0;
+ max-width: calc((100% - 6px) - 2em);
+ max-height: calc((100% - 6px) - 2em);
+ overflow: auto;
+}
+dialog + .backdrop {
+ position: fixed;
+ top: 0;
+ right: 0;
+ bottom: 0;
+ left: 0;
+ background:#0002;
+}
+`;
+document.head.insertAdjacentHTML('afterbegin','<style>'+css+'</style>');
+
 }
