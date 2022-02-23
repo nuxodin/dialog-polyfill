@@ -3,6 +3,7 @@ if (!window.HTMLDialogElement) {
     const proto = HTMLUnknownElement.prototype;
 
     let activeDialog = null;
+    let maxZIndex = 1000;
 
     proto.showModal = function(){
         this.__lastActiveElement = document.activeElement;
@@ -10,13 +11,14 @@ if (!window.HTMLDialogElement) {
         this.style.display = 'block';
         setTimeout(()=>{ // makes backdrop-transitions work
             this.style.display = '';
-            this.setAttribute('open','');
+            this.show();
+            this.setAttribute('aria-modal', 'true');
         })
         this.classList.add('dialog-polyfill-as-modal');
 
-        // focus first element
-        const focusableEl = this.querySelector('a[href],button,input,textarea,select,details,[contenteditable],[tabindex]');
-        focusableEl.focus();
+        // focus first element autofocus if available
+        const focusableEl = this.querySelector('[autofocus]') || this.querySelector('a[href],button,input,textarea,select,details,[contenteditable],[tabindex]');
+        focusableEl?.focus();
 
         this.addEventListener('blur',preventBlurListener,true);
         addEventListener('keydown',escListener,true);
@@ -26,24 +28,27 @@ if (!window.HTMLDialogElement) {
             this.__backdrop = document.createElement('div');
             this.__backdrop.classList.add('backdrop');
         }
-        this.__backdrop.style.zIndex = 1000;
+        this.__backdrop.style.zIndex = maxZIndex++;
         this.after(this.__backdrop);
 
-        this.style.zIndex = 1001;
+        this.style.zIndex = maxZIndex++;
 
         activeDialog = this;
     }
     proto.show = function(){
         this.setAttribute('open', '');
+        this.setAttribute('role', 'dialog'); // todo: this should be in the constructor
     }
-    proto.close = function(){
+    proto.close = function(returnValue){
         this.classList.remove('dialog-polyfill-as-modal');
         this.removeAttribute('open');
+        this.setAttribute('aria-modal', 'false');
         this.__backdrop?.remove();
         this.removeEventListener('blur',preventBlurListener,true)
         removeEventListener('keydown',escListener,true);
         activeDialog = null;
         this.__lastActiveElement?.focus();
+        if (returnValue!=null) activeDialog.returnValue = returnValue;
         let event = new Event('close',{bubbles:true})
         this.dispatchEvent(event);
     }
@@ -78,8 +83,7 @@ if (!window.HTMLDialogElement) {
     addEventListener('submit',e=>{
         if (e.target.getAttribute('method') !== 'dialog') return;
         e.preventDefault();
-        activeDialog.returnValue = e.submitter.value;
-        activeDialog.close();
+        activeDialog.close(e.submitter.value);
     },true)
 
     const css =

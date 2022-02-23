@@ -4,7 +4,9 @@
   <title>Dialog Polyfill Test</title>
   <script src="../dialog.js" type="module"></script>
 
-
+    <style>
+      :focus { background: #faa; }
+    </style>
 <body>
     <h1>Dialog Polyfill Test</h1>
 
@@ -19,4 +21,12 @@
                 press escape to close
             </li>
         </ul>
+    </dialog>
+
+
+
+    <button onclick="dialog2.showModal()">autofocus test showModal()</button>
+    <dialog id=dialog2>
+        <button>first Button</button>
+        <button autofocus>Button [autofocus]</button>
     </dialog>
