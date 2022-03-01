@@ -49,7 +49,7 @@ if (!window.HTMLDialogElement) {
         activeDialog = null;
         this.__lastActiveElement?.focus();
         if (returnValue!=null) activeDialog.returnValue = returnValue;
-        let event = new Event('close',{bubbles:true})
+        let event = new Event('close',{bubbles:false})
         this.dispatchEvent(event);
     }
     Object.defineProperty(proto, 'open', {
