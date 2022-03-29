@@ -101,7 +101,9 @@ if (!window.HTMLDialogElement) {
         'border-image:initial;'+
         'padding:1em;'+
         'background:white;'+
+        'background:Canvas;'+
         'color:black;'+
+        'color:CanvasText;'+
     '}'+
     'dialog:not([open]){'+
         'display:none;'+
