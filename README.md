@@ -20,7 +20,7 @@ dialog + .backdrop {
 }
 ```
 
-## Similar Project
+## Similar Projects
 
 ### From Google: 
 https://github.com/GoogleChrome/dialog-polyfill  
