@@ -27,7 +27,7 @@ https://github.com/GoogleChrome/dialog-polyfill
 Disadvantages:
 - Your need to register every Element like this: `dialogPolyfill.registerDialog(dialog)`
 - The CSS is not included in the js file
-- 6kb, 2 requests
+- >6kb, 2 requests
 
 ## Help / Feedback
 
