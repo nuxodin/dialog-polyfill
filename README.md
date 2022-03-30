@@ -2,6 +2,7 @@
 
 Lightweight polyfill (2kb) for the [dialog element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog).
 
+
 ## Ussage
 
 ```html
@@ -18,6 +19,14 @@ dialog + .backdrop {
   background-color: blue;
 }
 ```
+
+## Similar Project
+
+### From Google: 
+https://github.com/GoogleChrome/dialog-polyfill  
+Disadvantages:
+- Your need to register every Element like this: `dialogPolyfill.registerDialog(dialog)`
+- The CSS is not included in the js file
 
 ## Help / Feedback
 
