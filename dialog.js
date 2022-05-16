@@ -46,9 +46,9 @@ if (!window.HTMLDialogElement) {
         this.__backdrop?.remove();
         this.removeEventListener('blur',preventBlurListener,true)
         removeEventListener('keydown',escListener,true);
+        if (returnValue!=null) activeDialog.returnValue = returnValue;
         activeDialog = null;
         this.__lastActiveElement?.focus();
-        if (returnValue!=null) activeDialog.returnValue = returnValue;
         let event = new Event('close',{bubbles:false})
         this.dispatchEvent(event);
     }
@@ -80,11 +80,9 @@ if (!window.HTMLDialogElement) {
     }
 
 
-    addEventListener('submit',e=>{
+    document.addEventListener('submit',e=>{
         if (e.target.getAttribute('method') !== 'dialog') return;
         e.preventDefault();
-console.log(e)
-console.log(e.target)
         activeDialog.close(e.submitter.value);
     },true)
 
