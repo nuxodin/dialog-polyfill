@@ -83,6 +83,8 @@ if (!window.HTMLDialogElement) {
     addEventListener('submit',e=>{
         if (e.target.getAttribute('method') !== 'dialog') return;
         e.preventDefault();
+console.log(e)
+console.log(e.target)
         activeDialog.close(e.submitter.value);
     },true)
 
