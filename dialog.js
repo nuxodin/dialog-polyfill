@@ -1,5 +1,7 @@
 if (!window.HTMLDialogElement) {
 
+    window.HTMLDialogElement = HTMLUnknownElement;
+
     const proto = HTMLUnknownElement.prototype;
 
     let activeDialog = null;
