@@ -51,7 +51,7 @@ if (!window.HTMLDialogElement) {
         if (returnValue!=null) activeDialog.returnValue = returnValue;
         activeDialog = null;
         this.__lastActiveElement?.focus();
-        let event = new Event('close',{bubbles:false})
+        const event = new Event('close',{bubbles:false})
         this.dispatchEvent(event);
     }
     Object.defineProperty(proto, 'open', {
@@ -62,25 +62,6 @@ if (!window.HTMLDialogElement) {
             value ? this.open() : this.close();
         }
     })
-
-    function preventBlurListener(e){
-        if (!e.relatedTarget) return;
-        if (!activeDialog.contains(e.relatedTarget)) {
-            setTimeout(()=>{
-                e.target.focus();
-            })
-        }
-    }
-    function escListener(e){
-        if (e.key === "Escape") {
-            let event = new Event('cancel',{bubbles:true,cancelable:true})
-            activeDialog.dispatchEvent(event);
-            if (!event.defaultPrevented) {
-                activeDialog.close();
-            }
-        }
-    }
-
 
     document.addEventListener('submit',e=>{
         if (e.target.getAttribute('method') !== 'dialog') return;
@@ -128,4 +109,22 @@ if (!window.HTMLDialogElement) {
     '}';
     document.head.insertAdjacentHTML('afterbegin','<style>'+css+'</style>');
 
+}
+
+function preventBlurListener(e){
+    if (!e.relatedTarget) return;
+    if (!activeDialog.contains(e.relatedTarget)) {
+        setTimeout(()=>{
+            e.target.focus();
+        })
+    }
+}
+function escListener(e){
+    if (e.key === "Escape") {
+        const event = new Event('cancel',{bubbles:true,cancelable:true})
+        activeDialog.dispatchEvent(event);
+        if (!event.defaultPrevented) {
+            activeDialog.close();
+        }
+    }
 }
