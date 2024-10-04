@@ -59,7 +59,7 @@ if (!window.HTMLDialogElement) {
             return this.hasAttribute('open');
         },
         set(value){
-            value ? this.open() : this.close();
+            value ? this.show() : this.close();
         }
     })
 
